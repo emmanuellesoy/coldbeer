@@ -74,9 +74,7 @@ if ( 0 == $woocommerce_loop['loop'] % $woocommerce_loop['columns'] ) {
 				</div>
 				<div class="col-md-12">
 					<a href="<?php the_permalink(); ?>" class="btn btn-info btn-lg">Personaliza tu cerveza</a>
-				</div>
-				<div class="col-md-12">
-					<a href="<?php the_permalink(); ?>" class="link-default">O adquiere la Cerveza de la casa ></a>
+					<a href="<?php the_permalink(); ?>" class="col-md-12 link-default">O adquiere la Cerveza de la casa ></a>
 				</div>
 			</div>
 

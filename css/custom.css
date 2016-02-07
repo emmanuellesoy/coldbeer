@@ -123,6 +123,7 @@ ul.navbar-right li a:hover, ul.nav-center li a:hover {
 #blog-container, #woocommerce-container{
   background-color: rgba(255, 255, 255, 0.8);
 }
+.divisor{height: 40px;}
 .blog-separator{
   border-bottom: 2px solid #a0865c;
   margin: 45px 0px;
@@ -134,15 +135,41 @@ ul.navbar-right li a:hover, ul.nav-center li a:hover {
   font-size: 24px;
   font-family: 'Open Sans', Arial, serif;
 }
-#blog-container article h2 a{
+article > h2 >  a, article > h2 >  a:hover, article > h2 >  a:focus{
   font-family: 'Merriweather';
   color: #4a4a4a;
   font-style: normal;
   font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+article p{
+  font-family:'Open Sans', Arial, serif;
+  color: #4a4a4a;
+  font-style: normal;
+  font-size: 20px;
+  line-height: 30px;
+  margin: 20px 0px 40px 0px;
+}
+
+p small > *{
+  font-family: 'Roboto-Italic';
+  color: #4a4a4a;
+  font-style: normal;
+  font-size: 18px;
+  font-style: italic;
+  opacity: 0.6;
+  line-height: 20px;
+  font-weight: bold;
 }
 .link-default{
   color: #4a4a4a;
   font-size: 20px;
+  font-family:'Open Sans', Arial, serif;
+  font-style: italic;
+  margin-top: 20px;
+  text-decoration: none;
 
 }
 #blog-container article aside{
@@ -158,12 +185,6 @@ ul.navbar-right li a:hover, ul.nav-center li a:hover {
   color: #4a4a4a;
 }
 
-#blog-container article p{
-  font-family:'Open Sans', Arial, serif;
-  color: #4a4a4a;
-  font-style: normal;
-  font-size: 20px;
-}
 #woocommerce-container h1{
   color: #4a4a4a;
   font-size: 30px;

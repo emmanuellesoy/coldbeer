@@ -8,7 +8,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="<?php home_url(); ?>blog">
+      <a class="navbar-brand" href="<?php home_url(); ?>">
         <img src="<?php echo get_stylesheet_directory_uri() . '/img/logo.svg'; ?>" alt="<?php echo get_bloginfo('description'); ?>" width="170" />
       </a>
     </div>
@@ -17,14 +17,14 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li class="active">
-          <a href="<?php home_url(); ?>blog">
+          <a href="<?php home_url(); ?>">
             <img src="<?php echo get_stylesheet_directory_uri() . '/img/logo_ellysium.svg'; ?>" alt="<?php echo get_bloginfo('name'); ?>" />
           </a>
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Blog</a></li>
-        <li><a href="/tienda">Productos</a></li>
+        <li><a href="<?php echo home_url(); ?>/blog">Blog</a></li>
+        <li><a href="<?php echo home_url(); ?>/tienda">Productos</a></li>
         <li><a href="#" ><span class="label label-default">Personaliza tu cerveza</span></a></li>
       </ul>
     </div><!-- /.navbar-collapse -->

@@ -15,6 +15,7 @@
           <?php the_title(); ?>
         </a>
       </h2>
+      <div class="col-md-12 divisor"></div>
       <div class="col-md-12">
         <?php the_excerpt(); ?>
       </div>
@@ -23,6 +24,7 @@
       </aside>
       <div class="col-md-12">
         <a href="<?php the_permalink(); ?>" class="btn btn-info btn-lg">Leer más</a>
+        <div class="col-md-12 divisor"></div>        
         <div class="col-md-12 blog-separator"></div>        
       </di>      
       <!-- <p>
