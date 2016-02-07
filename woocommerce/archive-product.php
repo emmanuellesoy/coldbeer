@@ -35,18 +35,18 @@ get_header( 'shop' ); ?>
 
 		<?php if ( have_posts() ) : ?>
 
-      <div class="container light-bg">
-
+      <div class="container-fluid">
+      	<div id="woocommerce-container" class="col-md-10 col-md-offset-1">
+      		<div class="col-md-12">
+      			<h1>Conoce nuestros estilos de cerveza artesanal</h1>
+      		</div>
 			<?php woocommerce_product_loop_start(); ?>
-
-				<?php woocommerce_product_subcategories(); ?>
-
+			<div class="col-md-12">
+				<h1><?php woocommerce_product_subcategories(); ?></h1>
 				<?php while ( have_posts() ) : the_post(); ?>
-
 					<?php wc_get_template_part( 'content', 'product' ); ?>
-
 				<?php endwhile; // end of the loop. ?>
-
+			</div>
 			<?php woocommerce_product_loop_end(); ?>
 
 			<?php
@@ -57,7 +57,7 @@ get_header( 'shop' ); ?>
 				 */
 				do_action( 'woocommerce_after_shop_loop' );
 			?>
-
+		</div>
     </div>
 
 

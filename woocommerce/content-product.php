@@ -42,48 +42,66 @@ if ( 0 == $woocommerce_loop['loop'] % $woocommerce_loop['columns'] ) {
 	$classes[] = 'last';
 }
 ?>
-<li <?php post_class( $classes ); ?>>
+<div class="col-md-12">
+	<li <?php post_class( $classes ); ?>>
 
-	<?php do_action( 'woocommerce_before_shop_loop_item' ); ?>
+		<?php do_action( 'woocommerce_before_shop_loop_item' ); ?>
 
-	<a href="<?php the_permalink(); ?>">
+		<a href="<?php the_permalink(); ?>">
+			<div class="col-md-4 text-center">
+				<?php
+					/**
+					 * woocommerce_before_shop_loop_item_title hook
+					 *
+					 * @hooked woocommerce_show_product_loop_sale_flash - 10
+					 * @hooked woocommerce_template_loop_product_thumbnail - 10
+					 */
+					do_action( 'woocommerce_before_shop_loop_item_title' ); 
+				?>
+			</div>
+			<div class="col-md-8 text-left">	
+				<div class="col-md-12">
+					<?php	/**
+						 * woocommerce_shop_loop_item_title hook
+						 *
+						 * @hooked woocommerce_template_loop_product_title - 10
+						 */
+						do_action( 'woocommerce_shop_loop_item_title' );
+					?>
+				</div>
+				<div class="product-description-wc col-md-12">
+					<?php echo apply_filters( 'title-description', $post->post_excerpt ) ?>
+				</div>
+				<div class="col-md-12">
+					<a href="<?php the_permalink(); ?>" class="btn btn-info btn-lg">Personaliza tu cerveza</a>
+				</div>
+				<div class="col-md-12">
+					<a href="<?php the_permalink(); ?>" class="link-default">O adquiere la Cerveza de la casa ></a>
+				</div>
+			</div>
 
+			<?php				
+				/**
+				 * woocommerce_after_shop_loop_item_title hook
+				 *
+				 * @hooked woocommerce_template_loop_rating - 5
+				 * @hooked woocommerce_template_loop_price - 10
+				 */
+				do_action( 'woocommerce_after_shop_loop_item_title' );
+			?>
+
+		</a>
+		<div class="col-md-12 blog-separator"></div>
 		<?php
-			/**
-			 * woocommerce_before_shop_loop_item_title hook
-			 *
-			 * @hooked woocommerce_show_product_loop_sale_flash - 10
-			 * @hooked woocommerce_template_loop_product_thumbnail - 10
-			 */
-			do_action( 'woocommerce_before_shop_loop_item_title' );
 
 			/**
-			 * woocommerce_shop_loop_item_title hook
+			 * woocommerce_after_shop_loop_item hook
 			 *
-			 * @hooked woocommerce_template_loop_product_title - 10
+			 * @hooked woocommerce_template_loop_add_to_cart - 10
 			 */
-			do_action( 'woocommerce_shop_loop_item_title' );
+			//do_action( 'woocommerce_after_shop_loop_item' );
 
-			/**
-			 * woocommerce_after_shop_loop_item_title hook
-			 *
-			 * @hooked woocommerce_template_loop_rating - 5
-			 * @hooked woocommerce_template_loop_price - 10
-			 */
-			do_action( 'woocommerce_after_shop_loop_item_title' );
 		?>
 
-	</a>
-
-	<?php
-
-		/**
-		 * woocommerce_after_shop_loop_item hook
-		 *
-		 * @hooked woocommerce_template_loop_add_to_cart - 10
-		 */
-		do_action( 'woocommerce_after_shop_loop_item' );
-
-	?>
-
-</li>
+	</li>
+</div>

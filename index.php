@@ -6,31 +6,36 @@
   </section>
 </header>
 
-<section class="container light-bg">
-  <div
+<section id="blog-container" class="container-fluid">
+  <div class="col-md-12">
   <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
-    <article class="row">
-      <h2>
+    <article class="col-md-8 col-md-offset-2 col-xs-12">
+      <h2 class="col-md-8">
         <a href="<?php the_permalink(); ?>">
           <?php the_title(); ?>
         </a>
       </h2>
-      <div class="">
+      <div class="col-md-12">
         <?php the_excerpt(); ?>
       </div>
-      <aside class="">
-        <?php echo get_the_category_list(', ', 'single' ); ?>
+      <aside class="col-md-12">
+        Categoría: <?php echo get_the_category_list(', ', 'single' ); ?>
       </aside>
+      <div class="col-md-12">
+        <a href="<?php the_permalink(); ?>" class="btn btn-info btn-lg">Leer más</a>
+        <div class="col-md-12 blog-separator"></div>        
+      </di>      
       <!-- <p>
         <a href="<?php the_permalink(); ?>"><span class="label label-primary">Leer m&aacute;s</span></a>
       </p> -->
-    <?php endwhile; ?>
-  </article>
+    </article>
+  <?php endwhile; ?>
 <?php else :
   ?>
   <p>
     <?php _e( 'Sorry, no posts matched your criteria.' ); ?>
   </p>
 <?php endif; ?>
+  </div>
 </section>
 <?php get_footer(); ?>

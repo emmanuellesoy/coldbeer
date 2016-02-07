@@ -15,6 +15,7 @@ h6 {
   font-family: 'Merriweather', serif;
   font-style: italic;
   color: #fff;
+  font-weight: bold;
 }
 
 h1 {
@@ -55,14 +56,26 @@ p small {
 	padding-right: 0
 }
 
-ul.navbar-right li a {
+.nav-center{
+  width: 100%;
+  text-align: center;
+}
+
+.nav-center > li {
+  float: none;
+  display: inline-block;
+}
+.padding-top{
+  padding-top: 200px;
+}
+ul.navbar-right li a, ul.nav-center li a {
   color: #fff !important;
   font-family: 'Open Sans', Arial, serif;
   font-weight: 700;
   font-size: 16px !important;
 }
 
-ul.navbar-right li a:hover {
+ul.navbar-right li a:hover, ul.nav-center li a:hover {
   color: #D4D3A7 !important;
 }
 
@@ -103,7 +116,74 @@ ul.navbar-right li a:hover {
 
 .page-header-blog {
   background-image: none;
+  background-color: rgba(255, 255, 255, 0.8);
+  min-height: 500px;
 }
+
+#blog-container, #woocommerce-container{
+  background-color: rgba(255, 255, 255, 0.8);
+}
+.blog-separator{
+  border-bottom: 2px solid #a0865c;
+  margin: 45px 0px;
+}
+.btn-info{
+  background-image: url("../img/fondo-madera.jpg");
+  color: #fff;
+  border-color: #3a4033;
+  font-size: 24px;
+  font-family: 'Open Sans', Arial, serif;
+}
+#blog-container article h2 a{
+  font-family: 'Merriweather';
+  color: #4a4a4a;
+  font-style: normal;
+  font-size: 30px;
+}
+.link-default{
+  color: #4a4a4a;
+  font-size: 20px;
+
+}
+#blog-container article aside{
+  font-family: 'Roboto-Italic';
+  color: #4a4a4a;
+  font-style: italic;
+  font-size: 18px;
+  line-height: 20px;
+  opacity: 0.6;
+  margin-bottom: 30px;
+}
+#blog-container article aside a{
+  color: #4a4a4a;
+}
+
+#blog-container article p{
+  font-family:'Open Sans', Arial, serif;
+  color: #4a4a4a;
+  font-style: normal;
+  font-size: 20px;
+}
+#woocommerce-container h1{
+  color: #4a4a4a;
+  font-size: 30px;
+  font-family: 'Merriweather';
+  font-style: normal;
+  margin: 80px 0px;
+}
+#woocommerce-container h3{
+  color: #4a4a4a;
+  font-size: 24px;
+  font-family: 'Merriweather';
+  font-weight: bold;
+  font-style: normal;
+  margin: 0px 0px 40px 0px;
+}
+#woocommerce-container ul{list-style: none;}
+.page-header-blog h1{
+  color: #3a4033;
+}
+.product-description-wc{  margin: 0px 0px 50px 0px; color:#4a4a4a; font-size: 20px; line-height: 30px;}
 
 /**
 Timeline
@@ -250,6 +330,15 @@ Timeline
 
 .timeline-body > p + p {
   margin-top: 5px;
+}
+
+footer{
+  background-image: url(../img/fondo-madera.png);
+}
+
+footer .navbar-default{
+  position: relative;
+  min-height: 0px;
 }
 
 @media (max-width: 767px) {
