@@ -114,6 +114,17 @@ ul.navbar-right li a:hover, ul.nav-center li a:hover {
   flex-direction: column;
 }
 
+.page-header-custome {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  margin: 0px;
+  min-height: 750px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
 .page-header-blog {
   background-image: none;
   background-color: rgba(255, 255, 255, 0.8);
@@ -144,8 +155,9 @@ article > h2 >  a, article > h2 >  a:hover, article > h2 >  a:focus{
   text-decoration: none;
 }
 
-.general-content{
-  margin: 60px 0px; 
+.center-block{
+  float: none;
+  margin: 150px auto;
 }
 article p, .general-content > *{
   font-family:'Open Sans', Arial, serif;

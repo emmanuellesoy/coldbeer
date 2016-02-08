@@ -11,12 +11,12 @@
 		    	</a>
 	        </li>
 	        <li>
-	        	<a class="" href="#">
+	        	<a class="" href="<?php echo home_url(); ?>/">
 		        	Artículos
 		    	</a>
 	        </li>
 	        <li>
-	        	<a class="" href="#">
+	        	<a class="" href="<?php echo home_url(); ?>/contacto">
 		        	Contacto
 		    	</a>
 	        </li>                
