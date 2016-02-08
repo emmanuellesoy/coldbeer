@@ -144,7 +144,10 @@ article > h2 >  a, article > h2 >  a:hover, article > h2 >  a:focus{
   text-decoration: none;
 }
 
-article p{
+.general-content{
+  margin: 60px 0px; 
+}
+article p, .general-content > *{
   font-family:'Open Sans', Arial, serif;
   color: #4a4a4a;
   font-style: normal;
