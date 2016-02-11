@@ -12,7 +12,6 @@
 	<script>
 		$(document).ready(function(){
 			console.log("ready");
-
 		})
 	</script>
 
@@ -86,15 +85,24 @@
 				<?php }?>
 			</div>
 	      </div>
+	      <div class="tab-pane fade" id="photo_upload">
+	      	<div class="col-md-8">
+	      		<div class="col-md-3">Color:</div>
+	      		<div class="col-md-9">
+	      			<?php foreach ($variable as $key => $value) {
+	      				# code...
+	      			}?>
+	      		</div>
+	      	</div>
+	      	<div class="col-md-4">
+
+	      	</div>
+	      </div>	      
 	      <div class="tab-pane fade" id="text">
 			<div class="col-md-2 col-md-offset-1" id="choose_section_text">Escribe un texto:</div>
 			<div class="col-md-8">
 				<input type="text" class="form-control" placeholder="la información de u cerveza...">
 			</div>
-	      </div>
-	      <div class="tab-pane fade" id="settings">
-	          <h2>Settings Content Goes Here</h2>
-	          <img src="http://lorempixel.com/400/400/cats/4" alt="Cats"/>
 	      </div>
 	    </div>		
 		<div class="row" id="options">
