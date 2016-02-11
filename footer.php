@@ -11,7 +11,7 @@
 		    	</a>
 	        </li>
 	        <li>
-	        	<a class="" href="<?php echo home_url(); ?>/">
+	        	<a class="" href="<?php echo home_url(); ?>/contacto">
 		        	Artículos
 		    	</a>
 	        </li>
