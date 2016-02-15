@@ -1,4 +1,20 @@
-<nav class="navbar navbar-default">
+<script type="text/javascript">
+
+  jQuery(function($) {
+    $(window).scroll(function() {    
+        var scroll = $(window).scrollTop();
+        if (scroll >= 200) {
+            $(".navbar-fixed-top").addClass("darkHeader");
+        } else {
+            $(".navbar-fixed-top").removeClass("darkHeader");
+        }
+    });
+
+  });
+
+</script>
+
+<nav class="navbar navbar-default navbar-fixed-top">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -8,7 +24,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="<?php home_url(); ?>">
+      <a class="navbar-brand" href="<?php echo home_url(); ?>">
         <img src="<?php echo get_stylesheet_directory_uri() . '/img/logo.svg'; ?>" alt="<?php echo get_bloginfo('description'); ?>" width="170" />
       </a>
     </div>
@@ -17,7 +33,7 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li class="active">
-          <a href="<?php home_url(); ?>">
+          <a href="<?php echo home_url(); ?>">
             <img src="<?php echo get_stylesheet_directory_uri() . '/img/logo_ellysium.svg'; ?>" alt="<?php echo get_bloginfo('name'); ?>" />
           </a>
         </li>

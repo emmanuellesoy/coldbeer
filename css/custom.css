@@ -30,19 +30,22 @@ p small {
 
 }
 
+.content-boxed{
+  margin: 100px 0px;
+  padding-bottom: 100px;
+}
 .navbar-default {
-  background-image: url('../img/fondo-madera.jpg');
+  background: transparent;
   background-size: 10%;
   min-height: 110px;
   margin: 0;
   border: 0px;
   border-radius: 0;
-  position: fixed;
-  right: 0;
-  left: 0;
-  z-index: 1030;
 }
 
+.darkHeader{
+  background-image: url('../img/fondo-madera.jpg');
+}
 .navbar-default .navbar-nav>.active>a {
 	background: none !important
 }
@@ -168,14 +171,15 @@ article p, .general-content > *{
   line-height: 30px;
   margin: 20px 0px 40px 0px;
 }
-
-p small > *{
+.by_post_txt{
+    opacity: 0.6;
+}
+.by_post_txt, p small > *{
   font-family: 'Roboto-Italic';
   color: #4a4a4a;
   font-style: normal;
   font-size: 18px;
   font-style: italic;
-  opacity: 0.6;
   line-height: 20px;
   font-weight: bold;
 }
@@ -186,7 +190,9 @@ p small > *{
   font-style: italic;
   margin-top: 20px;
   text-decoration: none;
-
+}
+.link-default:hover{
+  color: #4a4a4a;
 }
 #blog-container article aside{
   font-family: 'Roboto-Italic';
@@ -243,7 +249,7 @@ Timeline
   position: absolute;
   content: " ";
   width: 3px;
-  background-color: #eeeeee;
+  background-color: #d7b073;
   left: 50%;
   margin-left: -1.5px;
 }
@@ -293,7 +299,7 @@ Timeline
   top: 16px;
   left: 50%;
   margin-left: -25px;
-  background-color: #999999;
+  background-color: #8a6a37;
   z-index: 100;
   border-top-right-radius: 50%;
   border-top-left-radius: 50%;
@@ -370,6 +376,7 @@ Timeline
 }
 
 footer{
+  padding: 50px 0px;
   background-image: url(../img/fondo-madera.png);
 }
 
@@ -377,7 +384,23 @@ footer .navbar-default{
   position: relative;
   min-height: 0px;
 }
-
+.footer-copyright{
+  padding: 20px 0px;
+  color: #fff;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: lighter;
+  font-size: 14px;
+}
+.container-fluid.module.parallax {
+  height: 500px;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+.container-fluid.module.parallax-1 {
+  background-image: url("../img/social-proof.png");
+}
 @media (max-width: 767px) {
   ul.timeline:before {
     left: 40px;

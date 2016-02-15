@@ -3,38 +3,25 @@
 <?php get_header(); ?>
 
 <header class="page-header text-center">
-
   <h1>Que la cerveza hable de ti</h1>
-
   <p>
-
     <small>
-
       Diseña la etiqueta de tu cerveza artesanal
-
     </small>
-
   </p>
-
 </header>
-
-
 
 <!-- start .main-content [section] -->
 
-<div class="container light-bg">
+<div class="container">
+  <div class="col-md-12 light-bg content-boxed">
+    <div class="timeline-header text-center">
+      <h4 class="timeline-title">Este es el proceso para crear tu cerveza</h4>
+    </div>
 
-  <div class="timeline-header text-center">
-
-    <h4 class="timeline-title">Este es el proceso para crear tu cerveza</h4>
-
-  </div>
-
-  <ul class="timeline">
-
+    <ul class="timeline">
     <li>
-
-      <div class="timeline-badge"><i class="glyphicon glyphicon-check"></i></div>
+      <div class="timeline-badge">1</div>
 
       <div class="timeline-panel">
 
@@ -72,7 +59,7 @@
 
     <li>
 
-      <div class="timeline-badge"><i class="glyphicon glyphicon-check"></i></div>
+      <div class="timeline-badge">2</div>
 
       <div class="timeline-panel timeline-panel-oposite">
 
@@ -110,7 +97,7 @@
 
     <li>
 
-      <div class="timeline-badge"><i class="glyphicon glyphicon-check"></i></div>
+      <div class="timeline-badge">3</div>
 
       <div class="timeline-panel">
 
@@ -148,7 +135,7 @@
 
     <li>
 
-      <div class="timeline-badge"><i class="glyphicon glyphicon-check"></i></div>
+      <div class="timeline-badge">4</div>
 
       <div class="timeline-panel timeline-panel-oposite">
 
@@ -179,34 +166,25 @@
         </div>
 
       </div>
-
     </li>
-
-
-
   </ul>
 
-
-
   <div class="timeline-footer text-center">
-
-    <h4 class="timeline-title">¿Listo?</h4>
-
+    <h4 class="timeline-title">¿Listo?</h4><br>
   </div>
-
-
-
-  <!-- <a href="#" ><span class="label label-primary">Personaliza tu cerveza</span></a> -->
-
-
-
-
-
+  <div class="col-md-12 text-center">
+    <a href="#" class="btn btn-info">Personaliza tu cerveza</a>
+  </div>
+  <div class="col-md-12 text-center">
+      <br><br>
+      <a href="<?php echo home_url(); ?>/tienda" class="link-default">O compra cervezas con la presentación de Ellysium</a>
+  </div>
+  </div>
 </div>
 
+<div class="container-fluid  module parallax parallax-1">
+
+</div>
 <!-- end .main-content [section] -->
-
-
-
 <?php get_footer(); ?>
 

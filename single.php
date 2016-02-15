@@ -9,8 +9,8 @@
           <?php the_title(); ?>
         </a>
         <p>
-          <small>
-            <?php the_author_posts_link(); ?> / <?php echo get_the_category_list(', ', 'single' ); ?>
+          <small class="by_post_txt">
+            Por   <?php the_author_posts_link(); ?> / <?php echo get_the_category_list(', ', 'single' ); ?>
           </small>
         </p>
       </h2>
