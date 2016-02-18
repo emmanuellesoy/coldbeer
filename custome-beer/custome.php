@@ -19,15 +19,19 @@
 			$(".label_type").click(function(){
 				console.log($(this).attr("labeltype"));
 				$("#label_type_value").val($(this).attr("labeltype"));
-				background_img = "url("+$(this).find("img").attr("src")+")";
+				background_img = "url("+$(this).find("img").attr("src")+"), url(images/cerveza.png)";
 				$("#beer_preview").css("background-image",background_img);
 			})			
 			$(".color-block").click(function(){
 				console.log($(this).attr("labelcolor"));
-				$("#label_color	_value").val($(this).attr("labelcolor"));
+				$("#label_color_value").val($(this).attr("labelcolor"));
 			})
 			$("#label_text").change(function(){
 				$("#label_text_value").val($("#label_text").val())
+			})				
+			$(".typography_type").click(function(){
+				console.log($(this).attr("typographytype"));				
+				$("#typography_type_value").val($(this).attr("typographytype"))
 			})			
 
 		})
@@ -65,8 +69,11 @@
 			background-repeat: no-repeat;
 			height: 550px;
 		}
+		#checkout_btn{ 
+			background-color: rgba(40, 44, 35, 0.82);
+		}
 		#choose_section{
-			height: 100px;
+			height: auto;
 			vertical-align: middle;
 			background-color: #e8e8e8;
 			padding: 20px 0px;			
@@ -111,10 +118,11 @@
 <body>
 	<div class="container-fluid">
 		<div class="row" id="beer_preview">
-			<div class="col-md-2 col-md-offset-1 col-xs-12">
-				<button class="btn btn-primary">Hacer pedido</button>
-			</div>
+		
 		</div>
+		<div class="row text-center" id="checkout_btn">
+			<button class="btn btn-primary">¡Haz click para hacer tu pedido!</button>
+		</div>		
 	    <div class="tab-content row" id="choose_section">
 	      <div class="tab-pane fade active in" id="beer_type">
 			<div class="col-md-2 col-md-offset-1 col-xs-12" id="choose_section_text">Estilo de cerveza:</div>
@@ -135,7 +143,22 @@
 			</div>
 	      </div>	      
 	      <div class="tab-pane fade" id="photo_upload">
-			<div class="col-md-12 col-xs-12">
+			<div class="col-md-12 col-xs-12 visible-xs">
+				<div class="row">
+					<div class="col-xs-12 text-left">Color:</div>
+					<div class="col-xs-1"></div>
+					<?php foreach ($label_color as $key => $value) { ?>
+						<div class="col-md-1 col-xs-2 color-block pointer" labelcolor="<?php echo $value['color'] ?>" style="background-color:<?php echo $value['color']?>"></div>
+					<?php }?>
+				</div>
+				<div class="row">
+					<div class="col-md-2 col-xs-12 text-left">O también:</div>
+					<div class="col-md-2 col-xs-12 text-left">
+						<input class="form-control" type="file">
+					</div>
+				</div>
+			</div>	      	
+			<div class="col-md-12 col-xs-12 visible-sm visible-lg">
 				<div class="col-md-2 col-xs-12 text-right">Color:</div>
 				<?php foreach ($label_color as $key => $value) { ?>
 					<div class="col-md-1 col-xs-2 color-block pointer" labelcolor="<?php echo $value['color'] ?>" style="background-color:<?php echo $value['color']?>"></div>
@@ -153,12 +176,12 @@
 			</div>
 	      </div>	      
 		<div class="tab-pane fade" id="text_typography">
-			<div class="col-md-2" id="choose_section_text">Escoge la tipografía:</div>
-				<?php foreach ($typography_type as $key => $value) { ?>
-					<div class="col-md-1 pointer typography_type text-center" typographytype="<?php echo $value['name']?>">
-						<h3 class="typography_type_style" style="font-family:<?php echo $value['name']?>;">Aa</h3>
-					</div>
-				<?php }?>
+			<div class="col-md-2 col-xs-12" id="choose_section_text">Escoge la tipografía:</div>
+			<?php foreach ($typography_type as $key => $value) { ?>
+				<div class="col-md-1 col-xs-2 pointer typography_type text-center" typographytype="<?php echo $value['name']?>">
+					<h3 class="typography_type_style" style="font-family:<?php echo $value['name']?>;">Aa</h3>
+				</div>
+			<?php }?>
 	      </div>
 	    </div>	
 
@@ -186,6 +209,7 @@
 		<input type="hidden" id="label_color_value" name="label_color_value">		
 		<input type="hidden" id="label_text_value" name="label_text_value">		
 		<input type="hidden" id="label_image_value" name="label_image_value">		
+		<input type="hidden" id="typography_type_value" name="typography_type_value">		
 	</div>
 </body>
 <footer></footer>
