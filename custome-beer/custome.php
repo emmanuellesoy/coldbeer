@@ -7,11 +7,10 @@
   	<script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
   	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
   	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+	<script src=	"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
 	<script>
 		$(document).ready(function(){
-			console.log("ready");
 			$(".beer_type").click(function(){
 				console.log($(this).attr("beertype"));
 				$("#beer_type_value").val($(this).attr("beertype"));
@@ -19,19 +18,28 @@
 			$(".label_type").click(function(){
 				console.log($(this).attr("labeltype"));
 				$("#label_type_value").val($(this).attr("labeltype"));
-				background_img = "url("+$(this).find("img").attr("src")+"), url(images/cerveza.png)";
-				$("#beer_preview").css("background-image",background_img);
+				$("#label-big").removeClass();
+				$("#label-small").removeClass();
+				$("#label-small").addClass($(this).attr("labeltype"));
+				$("#label-big").addClass($(this).attr("labeltype")+"-preview");
+				// background_img = "url("+$(this).find("img").attr("src")+"), url(images/cerveza.png)";
+				// $("#beer_preview").css("background-image",background_img);
 			})			
 			$(".color-block").click(function(){
 				console.log($(this).attr("labelcolor"));
 				$("#label_color_value").val($(this).attr("labelcolor"));
+				$("#label-big").css("background-color",$(this).attr("labelcolor"));
+				$("#label-small").css("background-color",$(this).attr("labelcolor"));
+
 			})
 			$("#label_text").change(function(){
-				$("#label_text_value").val($("#label_text").val())
+				$("#label_text_value").val($("#label_text").val());
+				$(".big-custome-text, .small-custome-text").html($("#label_text").val());
 			})				
 			$(".typography_type").click(function(){
 				console.log($(this).attr("typographytype"));				
-				$("#typography_type_value").val($(this).attr("typographytype"))
+				$("#typography_type_value").val($(this).attr("typographytype"));
+				$(".big-custome-text, .small-custome-text").css("font-family",$(this).attr("typographytype"));
 			})			
 
 		})
@@ -60,16 +68,32 @@
 	?>
 
 	<style type="text/css">
+		body{ 
+			background-color: rgba(40, 44, 35, 0.8);
+		}
 		#beer_preview{
 			padding-top: 200px;
-			background-color: rgba(40, 44, 35, 0.82);
 			padding-left: 50px;
 			background-image: url(images/cerveza.png);
 			background-position: center;
 			background-repeat: no-repeat;
 			height: 550px;
+		}		
+		#label_preview{
+			padding-top: 50px;
+			padding-left: 50px;
+			/*background-image: url(images/cerveza.png);*/
+			/*background-position: center;*/
+			/*background-repeat: no-repeat;*/
+			height: 550px;
 		}
 		#checkout_btn{ 
+			background-color: rgba(40, 44, 35, 0.82);
+		}
+		#checkout_btn button{ 
+			border:none;
+			background-color: rgba(195, 216, 51, 0.2) !important;
+			border-radius: 0px;
 			background-color: rgba(40, 44, 35, 0.82);
 		}
 		#choose_section{
@@ -112,16 +136,114 @@
 		}
 		.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover,.nav>li>a:focus, .nav>li>a:hover{background-color: transparent; border:none;}
 		.nav-tabs.nav-justified>.active>a, .nav-tabs.nav-justified>.active>a:focus, .nav-tabs.nav-justified>.active>a:hover{border:none;}
+		.circulo{
+			margin-left: 50px;
+			margin-top: 50px;
+			width: 95px;
+			height: 146px;
+			background: #FFF;
+			-moz-border-radius: 65px / 100px;
+			-webkit-border-radius: 65px / 100px;
+			border-radius: 65px / 100px;
+			border:5px solid #000;
+			border-style: double;
+			border-radius:  65px/100px;			
+		}		
+		.circulo-preview{
+			width: 249.3px;
+			height: 375px;
+			background: #FFF;
+			-moz-border-radius: 120px / 185px;
+			-webkit-border-radius: 120px / 185px;
+			border-radius: 120px / 185px;
+			border:5px solid #000;
+			border-style: double;
+			border-radius:  120px / 185px;				
+		}
+		.rectangulo {
+			border:5px solid #000;
+			border-style: double;
+		    width: 95px;
+		    height: 150px;
+		    background: #fff;
+		    margin-top: 60px;
+		    margin-left: 50px;
+		}	
+		.rectangulo-preview {
+			border:5px solid #000;
+			border-style: double;
+		    width: 220px;
+		    height: 350px;
+		    background: #fff;
+		}
+		.rombo {
+		    width: 80px;
+		    height: 80px;
+		    background: #fff;
+		    border: 5px solid #000;
+		    border-style: double;	
+		/* Rotate */
+		    -webkit-transform: rotate(-45deg);
+		    -moz-transform: rotate(-45deg);
+		    -ms-transform: rotate(-45deg);
+		    -o-transform: rotate(-45deg);
+		    transform: rotate(-45deg);
+		/* Rotate Origin */
+		    -webkit-transform-origin: 0 100%;
+		    -moz-transform-origin: 0 100%;
+		    -ms-transform-origin: 0 100%;
+		    -o-transform-origin: 0 100%;
+		    transform-origin: 0 100%;
+		    margin: 85px 0 10px 98px;
+		}		
+		.rombo-preview {
+		    width: 250px;
+		    height: 250px;
+		    background: #fff;
+		    border: 5px solid #000;
+		    border-style: double;	
+		/* Rotate */
+		    -webkit-transform: rotate(-45deg);
+		    -moz-transform: rotate(-45deg);
+		    -ms-transform: rotate(-45deg);
+		    -o-transform: rotate(-45deg);
+		    transform: rotate(-45deg);
+		/* Rotate Origin */
+		    -webkit-transform-origin: 0 100%;
+		    -moz-transform-origin: 0 100%;
+		    -ms-transform-origin: 0 100%;
+		    -o-transform-origin: 0 100%;
+		    transform-origin: 0 100%;
+		    margin-top: 100px;
+		}
+
+		.big-custome-text{
+			width: 250px;
+			padding: 30px;
+		}	
+		.small-custome-text{
+			width: 100px;
+			padding: 15px;
+		}	
 	</style>
   <title>Personaliza tu cerveza</title>
 </head>
 <body>
 	<div class="container-fluid">
-		<div class="row" id="beer_preview">
-		
+		<div class="col-md-6 col-md-offset-3">
+			<div class="col-md-6" id="label_preview">
+				<div id="label-big" class="diamond-preview">
+					<span class="big-custome-text"></span>
+				</div>
+			</div>
+			<div class="col-md-6 text-center" id="beer_preview">
+				<div id="label-small" class="diamond">
+					<span class="small-custome-text small"></span>
+				</div>
+			</div>
 		</div>
 		<div class="row text-center" id="checkout_btn">
-			<button class="btn btn-primary">¡Haz click para hacer tu pedido!</button>
+			<button class="btn btn-primary col-md-6 col-md-offset-3 col-xs-12">¡Haz click para hacer tu pedido!</button>
 		</div>		
 	    <div class="tab-content row" id="choose_section">
 	      <div class="tab-pane fade active in" id="beer_type">
