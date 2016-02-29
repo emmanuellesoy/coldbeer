@@ -7,7 +7,7 @@
   	<script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
   	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
   	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
-	<script src=	"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
 	<script>
 		$(document).ready(function(){
@@ -21,15 +21,28 @@
 				$("#label-big").removeClass();
 				$("#label-small").removeClass();
 				$("#label-small").addClass($(this).attr("labeltype"));
-				$("#label-big").addClass($(this).attr("labeltype")+"-preview");
-				// background_img = "url("+$(this).find("img").attr("src")+"), url(images/cerveza.png)";
-				// $("#beer_preview").css("background-image",background_img);
+				$("#label-big").addClass($(this).attr("labeltype")+"-preview");	
+				if($("#label_color_value").val() != ""){
+					$("#label-small, #label-big").addClass($(this).attr("labeltype")+"-"+$("#label_color_value").val());
+				}else{
+					$("#label-small, #label-big").addClass($(this).attr("labeltype")+"-negro");					
+				}
 			})			
 			$(".color-block").click(function(){
 				console.log($(this).attr("labelcolor"));
 				$("#label_color_value").val($(this).attr("labelcolor"));
-				$("#label-big").css("background-color",$(this).attr("labelcolor"));
-				$("#label-small").css("background-color",$(this).attr("labelcolor"));
+				$("#label-big").removeClass();
+				$("#label-small").removeClass();
+				if($("#label_type_value").val() !=""){
+					$("#label-small").addClass($("#label_type_value").val());
+					$("#label-big").addClass($("#label_type_value").val()+"-preview");
+					$("#label-small, #label-big").addClass($("#label_type_value").val()+"-"+$(this).attr("labelcolor"));					
+				}else{
+					console.log("arco-"+$(this).attr("labelcolor"));
+					$("#label-small").addClass("arco");					
+					$("#label-big").addClass("arco-preview");					
+					$("#label-small, #label-big").addClass("arco-"+$(this).attr("labelcolor"));					
+				}
 
 			})
 			$("#label_text").change(function(){
@@ -48,8 +61,7 @@
 	<?php 
 
 		$beer_type = array(['id'=>'1','name'=>'Ambar'], ['id'=>'2','name'=>'Rubia'], ['id'=>'3', 'name'=>'Oscura'],['id'=>'4', 'name'=>'Trigo']);
-
-		$label_type = array(['id'=>'1','name'=>'circulo', 'img'=>'circulo.png'], ['id'=>'2','name'=>'rombo', 'img'=>'rombo.png'], ['id'=>'3','name'=>'escudo', 'img'=>'escudo.png'], ['id'=>'4','name'=>'rectangulo', 'img'=>'rectangulo.png'],['id'=>'5','name'=>'arco', 'img'=>'arco.png'] );		
+		$label_type = array(['id'=>'1','name'=>'arco', 'img'=>'arco.png'], ['id'=>'2','name'=>'circulo', 'img'=>'circulo.png'], ['id'=>'3','name'=>'escudo', 'img'=>'escudo.png'], ['id'=>'4','name'=>'rectangulo', 'img'=>'rectangulo.png'],['id'=>'5','name'=>'rombo', 'img'=>'rombo.png'] );		
 
 		$typography_type = array(
 			['id'=>'1','name'=>"'Calligraffitti', cursive"], 
@@ -64,7 +76,19 @@
 			['id'=>'4', 'name'=>"'UnifrakturMaguntia', cursive"], 
 		);
 
-		$label_color = array(['id'=>'1','color'=>'#d9ff04'], ['id'=>'2','color'=>'#bd10e0'], ['id'=>'3', 'color'=>'#7ed321'],['id'=>'4', 'color'=>'#645a66'], ['id'=>'5', 'color'=>'#ae9f7e'])
+		$label_color = array(
+			['id'=>'1', 'color'=>'#1B1B1B', 'name'=>'negro'], 
+			['id'=>'2', 'color'=>'#FFFFFF', 'name'=>'blanco'], 
+			['id'=>'3', 'color'=>'#18A91C', 'name'=>'verde'],
+			['id'=>'4', 'color'=>'#FEDC37', 'name'=>'amarillo'], 
+			['id'=>'5', 'color'=>'#EA212D', 'name'=>'rojo'],
+			['id'=>'5', 'color'=>'#0E68B3', 'name'=>'azul'],
+			['id'=>'5', 'color'=>'#FD9326', 'name'=>'naranja'],
+			['id'=>'5', 'color'=>'#DB529A', 'name'=>'rosa'],
+			['id'=>'5', 'color'=>'#CCC5F8', 'name'=>'celeste'],
+			['id'=>'5', 'color'=>'#D7B073', 'name'=>'cafe'],
+		);		
+
 	?>
 
 	<style type="text/css">
@@ -72,8 +96,8 @@
 			background-color: rgba(40, 44, 35, 0.8);
 		}
 		#beer_preview{
-			padding-top: 200px;
-			padding-left: 50px;
+			padding-top: 230px;
+			padding-left: 92px;
 			background-image: url(images/cerveza.png);
 			background-position: center;
 			background-repeat: no-repeat;
@@ -82,9 +106,6 @@
 		#label_preview{
 			padding-top: 50px;
 			padding-left: 50px;
-			/*background-image: url(images/cerveza.png);*/
-			/*background-position: center;*/
-			/*background-repeat: no-repeat;*/
 			height: 550px;
 		}
 		#checkout_btn{ 
@@ -136,109 +157,160 @@
 		}
 		.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover,.nav>li>a:focus, .nav>li>a:hover{background-color: transparent; border:none;}
 		.nav-tabs.nav-justified>.active>a, .nav-tabs.nav-justified>.active>a:focus, .nav-tabs.nav-justified>.active>a:hover{border:none;}
-		.circulo{
-			margin-left: 50px;
-			margin-top: 50px;
-			width: 95px;
-			height: 146px;
-			background: #FFF;
-			-moz-border-radius: 65px / 100px;
-			-webkit-border-radius: 65px / 100px;
-			border-radius: 65px / 100px;
-			border:5px solid #000;
-			border-style: double;
-			border-radius:  65px/100px;			
-		}		
-		.circulo-preview{
-			width: 249.3px;
-			height: 375px;
-			background: #FFF;
-			-moz-border-radius: 120px / 185px;
-			-webkit-border-radius: 120px / 185px;
-			border-radius: 120px / 185px;
-			border:5px solid #000;
-			border-style: double;
-			border-radius:  120px / 185px;				
-		}
-		.rectangulo {
-			border:5px solid #000;
-			border-style: double;
-		    width: 95px;
-		    height: 150px;
-		    background: #fff;
-		    margin-top: 60px;
-		    margin-left: 50px;
-		}	
-		.rectangulo-preview {
-			border:5px solid #000;
-			border-style: double;
-		    width: 220px;
-		    height: 350px;
-		    background: #fff;
-		}
-		.rombo {
-		    width: 80px;
-		    height: 80px;
-		    background: #fff;
-		    border: 5px solid #000;
-		    border-style: double;	
-		/* Rotate */
-		    -webkit-transform: rotate(-45deg);
-		    -moz-transform: rotate(-45deg);
-		    -ms-transform: rotate(-45deg);
-		    -o-transform: rotate(-45deg);
-		    transform: rotate(-45deg);
-		/* Rotate Origin */
-		    -webkit-transform-origin: 0 100%;
-		    -moz-transform-origin: 0 100%;
-		    -ms-transform-origin: 0 100%;
-		    -o-transform-origin: 0 100%;
-		    transform-origin: 0 100%;
-		    margin: 85px 0 10px 98px;
-		}		
-		.rombo-preview {
-		    width: 250px;
-		    height: 250px;
-		    background: #fff;
-		    border: 5px solid #000;
-		    border-style: double;	
-		/* Rotate */
-		    -webkit-transform: rotate(-45deg);
-		    -moz-transform: rotate(-45deg);
-		    -ms-transform: rotate(-45deg);
-		    -o-transform: rotate(-45deg);
-		    transform: rotate(-45deg);
-		/* Rotate Origin */
-		    -webkit-transform-origin: 0 100%;
-		    -moz-transform-origin: 0 100%;
-		    -ms-transform-origin: 0 100%;
-		    -o-transform-origin: 0 100%;
-		    transform-origin: 0 100%;
-		    margin-top: 100px;
-		}
-
 		.big-custome-text{
-			width: 250px;
-			padding: 30px;
+			width: 225px;
+			text-align: center;
+			padding: 50px;
+			padding-top: 110px;
+			font-size: 30px;
+			color: #fff !important;
 		}	
 		.small-custome-text{
+			font-size: 20px;
+			color: #fff !important;
 			width: 100px;
-			padding: 15px;
-		}	
+			margin: -105px;
+			margin-top: -195px;
+			text-align: center;
+		}
+
+		.arco-negro{ background-image: url(images/etiquetas/arco_1.svg);}
+		.arco-blanco{ background-image: url(images/etiquetas/arco_2.svg);}
+		.arco-verde{ background-image: url(images/etiquetas/arco_3.svg);}
+		.arco-amarillo{ background-image: url(images/etiquetas/arco_4.svg);}
+		.arco-rojo{ background-image: url(images/etiquetas/arco_5.svg);}
+		.arco-azul{ background-image: url(images/etiquetas/arco_6.svg);}
+		.arco-naranja{ background-image: url(images/etiquetas/arco_7.svg);}
+		.arco-rosa{ background-image: url(images/etiquetas/arco_8.svg);}
+		.arco-celeste{ background-image: url(images/etiquetas/arco_9.svg);}
+		.arco-cafe{ background-image: url(images/etiquetas/arco_10.svg);}
+
+
+		.circulo-negro{ background-image: url(images/etiquetas/circulo_1.svg);}
+		.circulo-blanco{ background-image: url(images/etiquetas/circulo_2.svg);}
+		.circulo-verde{ background-image: url(images/etiquetas/circulo_3.svg);}
+		.circulo-amarillo{ background-image: url(images/etiquetas/circulo_4.svg);}
+		.circulo-rojo{ background-image: url(images/etiquetas/circulo_5.svg);}
+		.circulo-azul{ background-image: url(images/etiquetas/circulo_6.svg);}
+		.circulo-naranja{ background-image: url(images/etiquetas/circulo_7.svg);}
+		.circulo-rosa{ background-image: url(images/etiquetas/circulo_8.svg);}
+		.circulo-celeste{ background-image: url(images/etiquetas/circulo_9.svg);}
+		.circulo-cafe{ background-image: url(images/etiquetas/circulo_10.svg);}
+
+
+		.escudo-negro{ background-image: url(images/etiquetas/escudo_1.svg);}
+		.escudo-blanco{ background-image: url(images/etiquetas/escudo_2.svg);}
+		.escudo-verde{ background-image: url(images/etiquetas/escudo_3.svg);}
+		.escudo-amarillo{ background-image: url(images/etiquetas/escudo_4.svg);}
+		.escudo-rojo{ background-image: url(images/etiquetas/escudo_5.svg);}
+		.escudo-azul{ background-image: url(images/etiquetas/escudo_6.svg);}
+		.escudo-naranja{ background-image: url(images/etiquetas/escudo_7.svg);}
+		.escudo-rosa{ background-image: url(images/etiquetas/escudo_8.svg);}
+		.escudo-celeste{ background-image: url(images/etiquetas/escudo_9.svg);}
+		.escudo-cafe{ background-image: url(images/etiquetas/escudo_10.svg);}
+
+
+		.rectangulo-negro{ background-image: url(images/etiquetas/rectangulo_1.svg);}
+		.rectangulo-blanco{ background-image: url(images/etiquetas/rectangulo_2.svg);}
+		.rectangulo-verde{ background-image: url(images/etiquetas/rectangulo_3.svg);}
+		.rectangulo-amarillo{ background-image: url(images/etiquetas/rectangulo_4.svg);}
+		.rectangulo-rojo{ background-image: url(images/etiquetas/rectangulo_5.svg);}
+		.rectangulo-azul{ background-image: url(images/etiquetas/rectangulo_6.svg);}
+		.rectangulo-naranja{ background-image: url(images/etiquetas/rectangulo_7.svg);}
+		.rectangulo-rosa{ background-image: url(images/etiquetas/rectangulo_8.svg);}
+		.rectangulo-celeste{ background-image: url(images/etiquetas/rectangulo_9.svg);}
+		.rectangulo-cafe{ background-image: url(images/etiquetas/rectangulo_10.svg);}
+
+
+		.rombo-negro{ background-image: url(images/etiquetas/rombo_1.svg);}
+		.rombo-blanco{ background-image: url(images/etiquetas/rombo_2.svg);}
+		.rombo-verde{ background-image: url(images/etiquetas/rombo_3.svg);}
+		.rombo-amarillo{ background-image: url(images/etiquetas/rombo_4.svg);}
+		.rombo-rojo{ background-image: url(images/etiquetas/rombo_5.svg);}
+		.rombo-azul{ background-image: url(images/etiquetas/rombo_6.svg);}
+		.rombo-naranja{ background-image: url(images/etiquetas/rombo_7.svg);}
+		.rombo-rosa{ background-image: url(images/etiquetas/rombo_8.svg);}
+		.rombo-celeste{ background-image: url(images/etiquetas/rombo_9.svg);}
+		.rombo-cafe{ background-image: url(images/etiquetas/rombo_10.svg);}
+		
+		.arco{
+			height: 100px;
+			width: 100px;
+		}
+		.arco-preview{			
+			height: 300px;
+			width: 300px;
+		}
+		.circulo{
+			height: 100px;
+			width: 100px;
+		}
+		.circulo-preview{			
+			height: 300px;
+			width: 300px;
+		}
+		.escudo{
+			height: 100px;
+			width: 100px;
+		}
+		.escudo-preview{			
+			height: 300px;
+			width: 300px;
+		}		
+		.rectangulo{
+			height: 100px;
+			width: 100px;
+		}
+		.rectangulo-preview{
+			height: 300px;
+			width: 300px;
+		}		
+		.rombo{
+			height: 100px;
+			width: 100px;
+		}
+		.rombo-preview{			
+			height: 300px;
+			width: 300px;
+		}		
+
+		#label-big{
+			background-repeat: no-repeat;
+		}		
+		#label-small{
+			padding-top:250px;
+			padding-left: 110px;
+			background-repeat: no-repeat;
+		}
+
+		.wordwrap { 
+		   white-space: pre-wrap;      /* CSS3 */   
+		   white-space: -moz-pre-wrap; /* Firefox */    
+		   white-space: -pre-wrap;     /* Opera <7 */   
+		   white-space: -o-pre-wrap;   /* Opera 7 */    
+		   word-wrap: break-word;      /* IE */
+		}		
+
+	    @media only screen and (max-width : 320px) {
+	        #label_preview{padding-left: 0px;}
+	        #beer_preview{padding-left: 64px;}
+	    }
+
+
 	</style>
   <title>Personaliza tu cerveza</title>
 </head>
 <body>
 	<div class="container-fluid">
 		<div class="col-md-6 col-md-offset-3">
-			<div class="col-md-6" id="label_preview">
-				<div id="label-big" class="diamond-preview">
-					<span class="big-custome-text"></span>
+			<div class="col-md-6 col-xs-12" id="label_preview">
+				<div id="label-big" class="arco-preview arco-negro">
+					<div class="big-custome-text wordwrap"></div>
 				</div>
 			</div>
-			<div class="col-md-6 text-center" id="beer_preview">
-				<div id="label-small" class="diamond">
-					<span class="small-custome-text small"></span>
+			<div class="col-md-6 col-xs-12" id="beer_preview">
+				<div id="label-small" class="arco arco-negro">
+					<div class="small-custome-text small wordwrap"></div>
 				</div>
 			</div>
 		</div>
@@ -270,7 +342,7 @@
 					<div class="col-xs-12 text-left">Color:</div>
 					<div class="col-xs-1"></div>
 					<?php foreach ($label_color as $key => $value) { ?>
-						<div class="col-md-1 col-xs-2 color-block pointer" labelcolor="<?php echo $value['color'] ?>" style="background-color:<?php echo $value['color']?>"></div>
+						<div class="col-md-1 col-xs-2 color-block pointer" labelcolor="<?php echo $value['name'] ?>" style="background-color:<?php echo $value['color']?>"></div>
 					<?php }?>
 				</div>
 				<div class="row">
@@ -281,13 +353,19 @@
 				</div>
 			</div>	      	
 			<div class="col-md-12 col-xs-12 visible-sm visible-lg">
-				<div class="col-md-2 col-xs-12 text-right">Color:</div>
-				<?php foreach ($label_color as $key => $value) { ?>
-					<div class="col-md-1 col-xs-2 color-block pointer" labelcolor="<?php echo $value['color'] ?>" style="background-color:<?php echo $value['color']?>"></div>
-				<?php }?>
-				<div class="col-md-2 col-xs-12 text-right">O también:</div>
-				<div class="col-md-2 col-xs-12 text-left">
-					<input class="form-control" type="file">
+				<div class="col-md-5 col-md-offset-1">
+					<span class="col-md-2">Color:</span>
+					<div class="col-md-10">
+						<?php foreach ($label_color as $key => $value) { ?>
+							<div class="col-md-1 color-block pointer" labelcolor="<?php echo $value['name'] ?>" style="background-color:<?php echo $value['color']?>"></div>
+						<?php }?>
+					</div>
+				</div>
+				<div class="col-md-6 text-right">
+					<span class="col-md-3">O también:</span>
+					<div class="col-md-4 text-left">
+						<input class="form-control" type="file">
+					</div>
 				</div>
 			</div>
 	      </div>
@@ -298,12 +376,14 @@
 			</div>
 	      </div>	      
 		<div class="tab-pane fade" id="text_typography">
-			<div class="col-md-2 col-xs-12" id="choose_section_text">Escoge la tipografía:</div>
-			<?php foreach ($typography_type as $key => $value) { ?>
-				<div class="col-md-1 col-xs-2 pointer typography_type text-center" typographytype="<?php echo $value['name']?>">
-					<h3 class="typography_type_style" style="font-family:<?php echo $value['name']?>;">Aa</h3>
-				</div>
-			<?php }?>
+			<div class="col-md-2 col-md-offset-1" id="choose_section_text">Escoge la tipografía:</div>
+			<div class="col-md-8">
+				<?php foreach ($typography_type as $key => $value) { ?>
+					<div class="col-md-1 col-xs-2 pointer typography_type text-center" typographytype="<?php echo $value['name']?>">
+						<h3 class="typography_type_style" style="font-family:<?php echo $value['name']?>;">Aa</h3>
+					</div>
+				<?php }?>
+			</div>
 	      </div>
 	    </div>	
 
