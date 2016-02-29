@@ -291,6 +291,10 @@
 		   word-wrap: break-word;      /* IE */
 		}		
 
+		.navbar-default{
+			background: rgba(40, 44, 35, 0.8);
+			border-color: rgba(40, 44, 35, 0.8);
+		}
 	    @media only screen and (max-width : 320px) {
 	        #label_preview{padding-left: 0px;}
 	        #beer_preview{padding-left: 64px;}
@@ -301,6 +305,38 @@
   <title>Personaliza tu cerveza</title>
 </head>
 <body>
+	<nav class="navbar navbar-default navbar-fixed-top">
+	  <div class="container-fluid">
+	    <!-- Brand and toggle get grouped for better mobile display -->
+	    <div class="navbar-header">
+	      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+	        <span class="sr-only">Toggle navigation</span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	      </button>
+	      <a class="navbar-brand" href="">
+	        <img src="images/logo.svg" width="170" />
+	      </a>
+	    </div>
+
+	    <!-- Collect the nav links, forms, and other content for toggling -->
+	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	      <ul class="nav navbar-nav">
+	        <li class="active">
+	          <a href="">
+	            <img src="images/logo_ellysium.svg" alt="" />
+	          </a>
+	        </li>
+	      </ul>
+	      <ul class="nav navbar-nav navbar-right">
+	        <li><a href="">Blog</a></li>
+	        <li><a href="">Productos</a></li>
+	      </ul>
+	    </div><!-- /.navbar-collapse -->
+	  </div><!-- /.container-fluid -->
+	</nav>
+
 	<div class="container-fluid">
 		<div class="col-md-6 col-md-offset-3">
 			<div class="col-md-6 col-xs-12" id="label_preview">
