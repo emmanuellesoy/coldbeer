@@ -5,14 +5,35 @@
   	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   	<link href='https://fonts.googleapis.com/css?family=Calligraffitti|New+Rocker|Fugaz+One|Lobster|Trade+Winds|UnifrakturCook:700|Oregano|Ewert|Eagle+Lake|UnifrakturMaguntia' rel='stylesheet' type='text/css'>
   	<script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
   	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
   	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+	<script>
+		(function(a){a.fn.maxlength=function(b){var c=a(this);return c.each(function(){b=a.extend({},{counterContainer:!1,text:"%left caracteres restantes"},b);var c=a(this),d={options:b,field:c,counter:a('<div class="maxlength"></div>'),maxLength:parseInt(c.attr("maxlength"),10),lastLength:null,updateCounter:function(){var b=this.field.val().length,c=this.options.text.replace(/\B%(length|maxlength|left)\b/g,a.proxy(function(a,c){return"length"==c?b:"maxlength"==c?this.maxLength:this.maxLength-b},this));this.counter.html(c),b!=this.lastLength&&this.updateLength(b)},updateLength:function(a){this.field.trigger("update.maxlength",[this.field,this.lastLength,a,this.maxLength,this.maxLength-a]),this.lastLength=a}};d.maxLength&&(d.field.data("maxlength",d).bind({"keyup change":function(){a(this).data("maxlength").updateCounter()},"cut paste drop":function(){setTimeout(a.proxy(function(){a(this).data("maxlength").updateCounter()},this),1)}}),b.counterContainer?b.counterContainer.append(d.counter):d.field.after(d.counter),d.updateCounter())}),c}})(jQuery);
+	</script>
 
 	<script>
 		$(document).ready(function(){
+			$(".big-custome-text").draggable();
+
+			$(".big-custome-text").bind("drag", function(){
+				console.log("drag");
+			    var offset = $(this).offset();
+			    $(".small-custome-text").css({ "margin-left" : offset.left-parseInt($(".small-custome-text").css("margin-left").replace("px","")), "margin-top": offset.top-parseInt($(".small-custome-text").css("margin-top").replace("px",""))});
+			});			
+			$("#beer_type_value").val("Ambar");
+			$("#label_type_value").val("arco");
+			$("#label_color_value").val("negro");
+			$("#typography_type_value").val("'Calligraffitti', cursive;");
+				
+			$(".big-custome-text, .small-custome-text").css("font-family",$("#typography_type_value").val());
+			$(".beer_type[beertype='Ambar']").addClass("selected");
+			
 			$(".beer_type").click(function(){
 				console.log($(this).attr("beertype"));
+				$(".beer_type").removeClass("selected");
+				$(this).addClass("selected");
 				$("#beer_type_value").val($(this).attr("beertype"));
 			})
 			$(".label_type").click(function(){
@@ -31,8 +52,8 @@
 			$(".color-block").click(function(){
 				console.log($(this).attr("labelcolor"));
 				$("#label_color_value").val($(this).attr("labelcolor"));
-				$("#label-big").removeClass();
-				$("#label-small").removeClass();
+				$("#label-big").removeClass().removeAttr("style");;
+				$("#label-small").removeClass().removeAttr("style");;
 				if($("#label_type_value").val() !=""){
 					$("#label-small").addClass($("#label_type_value").val());
 					$("#label-big").addClass($("#label_type_value").val()+"-preview");
@@ -45,7 +66,8 @@
 				}
 
 			})
-			$("#label_text").change(function(){
+			$("#label_text").maxlength();
+			$("#label_text").keyup(function(){
 				$("#label_text_value").val($("#label_text").val());
 				$(".big-custome-text, .small-custome-text").html($("#label_text").val());
 			})				
@@ -53,9 +75,63 @@
 				console.log($(this).attr("typographytype"));				
 				$("#typography_type_value").val($(this).attr("typographytype"));
 				$(".big-custome-text, .small-custome-text").css("font-family",$(this).attr("typographytype"));
-			})			
+			})
+
+		    $(".uploadimage").change(function(){
+		    	console.log("nanoan");
+		        readURL(this);
+		    });	
+
+		    $("#font-bigger").click(function(){
+		    	var font_size_label_big = $(".big-custome-text").css("font-size").replace("px","");
+				if(font_size_label_big<65){
+					$(".big-custome-text").css("font-size", parseInt(parseInt(font_size_label_big)+1)+"px");
+					$(".small-custome-text").css("font-size", parseInt(parseInt(parseInt(font_size_label_big)+1)/2)+"px");
+				}
+		    })	
+		    $("#font-smaller").click(function(){
+		    	var font_size_label_big = $(".big-custome-text").css("font-size").replace("px","");
+				if(font_size_label_big>12){
+					$(".big-custome-text").css("font-size", parseInt(parseInt(font_size_label_big)-1)+"px");
+					$(".small-custome-text").css("font-size", parseInt(parseInt(parseInt(font_size_label_big)-1)/2)+"px");
+				}
+		    })
 
 		})
+
+	    function readURL(input) {
+			$("#label-big").removeClass();
+			$("#label-small").removeClass();
+			if($("#label_type_value").val() !=""){
+				$("#label-small").addClass($("#label_type_value").val());
+				$("#label-big").addClass($("#label_type_value").val()+"-preview");
+				$("#label-small, #label-big").addClass($("#label_type_value").val()+"-"+$(this).attr("labelcolor"));					
+			}else{
+				$("#label-small").addClass("arco");					
+				$("#label-big").addClass("arco-preview");					
+				$("#label-small, #label-big").addClass("arco-"+$(this).attr("labelcolor"));					
+			}	            	
+
+
+	        if(input.files && input.files[0]) {
+
+	            var reader = new FileReader();
+	            reader.onload = function (e) {
+					$("#label-big").removeClass();
+					$("#label-small").removeClass();	            	
+
+					if($("#label_type_value").val() !=""){
+						$("#label-small").addClass($("#label_type_value").val());
+						$("#label-big").addClass($("#label_type_value").val()+"-preview");
+					}else{
+						$("#label-small").addClass("arco");					
+						$("#label-big").addClass("arco-preview");					
+					}		                
+					$("#label-small, #label-big").css("background-image","url("+e.target.result+")");					
+	            }
+	            reader.readAsDataURL(input.files[0]);
+	        }
+	    }
 	</script>
 
 	<?php 
@@ -92,8 +168,18 @@
 	?>
 
 	<style type="text/css">
+		@import url("https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,300,400,600&subset=latin-ext,latin");
+
 		body{ 
 			background-color: rgba(40, 44, 35, 0.8);
+		}
+		.selected{
+			text-decoration: underline;
+		}
+		.maxlength{
+			font-size: 12px;
+			font-style: italic;
+			float: right;
 		}
 		#beer_preview{
 			padding-top: 230px;
@@ -134,7 +220,6 @@
 			font-size: 20px;
 			line-height: 30px;
 			color: #4a4a4a;
-
 		}
 		.btn-primary{
 		  background:rgba(195, 216, 51, 0.2);
@@ -166,10 +251,10 @@
 			color: #fff !important;
 		}	
 		.small-custome-text{
-			font-size: 20px;
+			font-size: 15px;
 			color: #fff !important;
-			width: 100px;
-			margin: -105px;
+			width: 62px;
+			margin: -88px;
 			margin-top: -195px;
 			text-align: center;
 		}
@@ -292,9 +377,13 @@
 		}		
 
 		.navbar-default{
-			background: rgba(40, 44, 35, 0.8);
-			border-color: rgba(40, 44, 35, 0.8);
+			background: transparent;
+			border-color: transparent;
 		}
+		.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover{background-color: transparent;}
+		.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.open>a{background-image: none;}
+	    .navbar-default .navbar-nav>li>a{color: #fff; font-family: 'Open Sans', Arial, serif; font-weight:700; font-size:16px;}
+	    
 	    @media only screen and (max-width : 320px) {
 	        #label_preview{padding-left: 0px;}
 	        #beer_preview{padding-left: 64px;}
@@ -341,12 +430,12 @@
 		<div class="col-md-6 col-md-offset-3">
 			<div class="col-md-6 col-xs-12" id="label_preview">
 				<div id="label-big" class="arco-preview arco-negro">
-					<div class="big-custome-text wordwrap"></div>
+					<div class="big-custome-text wordwrap" style="font-family:'Calligraffitti', cursive;"></div>
 				</div>
 			</div>
 			<div class="col-md-6 col-xs-12" id="beer_preview">
 				<div id="label-small" class="arco arco-negro">
-					<div class="small-custome-text small wordwrap"></div>
+					<div class="small-custome-text small wordwrap" style="font-family:'Calligraffitti', cursive;"></div>
 				</div>
 			</div>
 		</div>
@@ -384,7 +473,9 @@
 				<div class="row">
 					<div class="col-md-2 col-xs-12 text-left">O también:</div>
 					<div class="col-md-2 col-xs-12 text-left">
-						<input class="form-control" type="file">
+						<form runat="server">
+							<input class="form-control uploadimage" type="file">
+						</form>
 					</div>
 				</div>
 			</div>	      	
@@ -400,15 +491,25 @@
 				<div class="col-md-6 text-right">
 					<span class="col-md-3">O también:</span>
 					<div class="col-md-4 text-left">
-						<input class="form-control" type="file">
+						<form runat="server">						
+							<input class="form-control uploadimage" type="file">
+						</form>
 					</div>
 				</div>
 			</div>
 	      </div>
 	      <div class="tab-pane fade" id="text">
 			<div class="col-md-2 col-md-offset-1">Escribe un texto:</div>
-			<div class="col-md-8">
-				<input type="text" id="label_text" class="form-control" placeholder="la información de tu cerveza...">
+			<div class="col-md-6">
+				<input type="text" id="label_text" autofocus  maxlength="150"  class="form-control" placeholder="la información de tu cerveza...">
+			</div>
+			<div class="col-md-2">
+				<button type="button" class="btn btn-default" aria-label="Left Align" id="font-bigger">
+				  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+				</button>
+				<button type="button" class="btn btn-default" aria-label="Left Align" id="font-smaller">
+				  <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+				</button>
 			</div>
 	      </div>	      
 		<div class="tab-pane fade" id="text_typography">
@@ -435,7 +536,7 @@
 			  	<a href="#photo_upload" role="tab" data-toggle="tab"><img src="images/imagen.png"></a>
 			  </li>
 			  <li role="presentation">
-			  	<a href="#text" role="tab" data-toggle="tab"><img src="images/texto.png"></a>
+			  	<a href="#text" role="tab" data-toggle="tab" id="write-text-click"><img src="images/texto.png"></a>
 			  </li>
 			  <li role="presentation">
 			  	<a href="#text_typography" role="tab" data-toggle="tab"><img src="images/tipografia.png"></a>
