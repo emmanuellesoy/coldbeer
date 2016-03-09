@@ -1,0 +1,8 @@
+cambios custome beer 
+
+-Los contornos cambiarán de color
+-la imagen cambiará el background y se ajustará la imagen a una adecuada al servidor
+
+-Al seleccionar estilo de cerveza subrayar el seleccionado
+-Se reducirá el tamaño del input text y se pondrán dos botones. Habrá un límite de caracteres (150). Habrá un botón de más y uno de menos para disminuir y aumentar la fuente (max 65px - min 12px)
+-El texto de la etiqueta tendrá efecto de drag and drop para que el usuario decida la posición

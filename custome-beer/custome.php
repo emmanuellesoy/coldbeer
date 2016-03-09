@@ -18,9 +18,8 @@
 			$(".big-custome-text").draggable();
 
 			$(".big-custome-text").bind("drag", function(){
-				console.log("drag");
 			    var offset = $(this).offset();
-			    $(".small-custome-text").css({ "margin-left" : offset.left-parseInt($(".small-custome-text").css("margin-left").replace("px","")), "margin-top": offset.top-parseInt($(".small-custome-text").css("margin-top").replace("px",""))});
+			    $(".small-custome-text").css({ "margin-left" : offset.left-parseInt($(".small-custome-text").css("margin-left").replace("px","")), "margin-top": offset.top-parseInt($(".small-custome-text").css("margin-top").replace("px",""))-10});
 			});			
 			$("#beer_type_value").val("Ambar");
 			$("#label_type_value").val("arco");
@@ -39,15 +38,26 @@
 			$(".label_type").click(function(){
 				console.log($(this).attr("labeltype"));
 				$("#label_type_value").val($(this).attr("labeltype"));
-				$("#label-big").removeClass();
-				$("#label-small").removeClass();
+				$("#label-big,#label-small").removeClass();
+				$("#label-big-border, #label-small-border").removeClass();
+				
 				$("#label-small").addClass($(this).attr("labeltype"));
-				$("#label-big").addClass($(this).attr("labeltype")+"-preview");	
+				$("#label-big").addClass($(this).attr("labeltype")+"-preview");
+				
+				$("#label-big-border").addClass($(this).attr("labeltype")+"-border-preview");					
+				$("#label-small-border").addClass($(this).attr("labeltype")+"-border");
+				
 				if($("#label_color_value").val() != ""){
 					$("#label-small, #label-big").addClass($(this).attr("labeltype")+"-"+$("#label_color_value").val());
 				}else{
 					$("#label-small, #label-big").addClass($(this).attr("labeltype")+"-negro");					
 				}
+
+				if($("#border_color_value").val() != ""){
+					$("#label-big-border, #label-small-border").addClass($(this).attr("labeltype")+"-border-"+$("#border_color_value").val());
+				}else{
+					$("#label-big-border, #label-small-border").addClass($(this).attr("labeltype")+"-border-blanco");
+				}	
 			})			
 			$(".color-block").click(function(){
 				console.log($(this).attr("labelcolor"));
@@ -64,7 +74,22 @@
 					$("#label-big").addClass("arco-preview");					
 					$("#label-small, #label-big").addClass("arco-"+$(this).attr("labelcolor"));					
 				}
-
+			})			
+			$(".border-color-block").click(function(){
+				console.log($(this).attr("bordercolor"));
+				$("#border_color_value").val($(this).attr("bordercolor"));
+				$("#label-big-border").removeClass().removeAttr("style");
+				$("#label-small-border").removeClass().removeAttr("style");
+				
+				if($("#label_type_value").val() !=""){
+					$("#label-small-border").addClass($("#label_type_value").val() +"-border");
+					$("#label-big-border").addClass($("#label_type_value").val()+"-border-preview");
+					$("#label-small-border, #label-big-border").addClass($("#label_type_value").val()+"-border-"+$(this).attr("bordercolor"));					
+				}else{
+					$("#label-small-border").addClass("arco-border");					
+					$("#label-big-border").addClass("arco-border-preview");					
+					$("#label-small-border, #label-big-border").addClass("arco-border-"+$(this).attr("bordercolor"));					
+				}
 			})
 			$("#label_text").maxlength();
 			$("#label_text").keyup(function(){
@@ -165,6 +190,10 @@
 			['id'=>'5', 'color'=>'#D7B073', 'name'=>'cafe'],
 		);		
 
+		$borde_color = array(
+			['id'=>'1', 'color'=>"#FFF", 'name'=>'blanco'],
+			['id'=>'1', 'color'=>"#000", 'name'=>'negro'],
+		);
 	?>
 
 	<style type="text/css">
@@ -183,8 +212,8 @@
 		}
 		#beer_preview{
 			padding-top: 230px;
-			padding-left: 92px;
-			background-image: url(images/cerveza.png);
+			padding-left: 103px;
+			background-image: url(images/cerveza.svg);
 			background-position: center;
 			background-repeat: no-repeat;
 			height: 550px;
@@ -214,7 +243,7 @@
 			padding-bottom: 20px;			
 		}
 		.pointer{cursor: pointer;}	
-		.color-block{height: 30px;}
+		.color-block, .border-color-block{height: 30px;}
 		.tab-pane{ 
 			font-family: 'Open Sans', Arial, serif;
 			font-size: 20px;
@@ -243,21 +272,47 @@
 		.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover,.nav>li>a:focus, .nav>li>a:hover{background-color: transparent; border:none;}
 		.nav-tabs.nav-justified>.active>a, .nav-tabs.nav-justified>.active>a:focus, .nav-tabs.nav-justified>.active>a:hover{border:none;}
 		.big-custome-text{
+			cursor: move;
 			width: 225px;
 			text-align: center;
 			padding: 50px;
-			padding-top: 110px;
+			/*padding-top: 110px;*/
 			font-size: 30px;
 			color: #fff !important;
+			margin-top: -200px;
 		}	
 		.small-custome-text{
+			cursor: move;
 			font-size: 15px;
 			color: #fff !important;
 			width: 62px;
-			margin: -88px;
-			margin-top: -195px;
+			/*margin: -88px;*/
+			margin-top: -70px;
+			margin-left: 22px;
 			text-align: center;
 		}
+
+		.arco-border{height: 138px; width: 138px;}
+		.arco-border-preview{height: 300px; width: 300px;}
+		.circulo-border{height: 138px; width: 138px;}
+		.circulo-border-preview{height: 300px; width: 300px;}
+		.escudo-border{height: 138px; width: 138px;}
+		.escudo-border-preview{height: 300px; width: 300px;}		
+		.rectangulo-border{height: 138px; width: 138px;}
+		.rectangulo-border-preview{height: 300px; width: 300px;}
+		.rombo-border{height: 138px; width: 138px;}
+		.rombo-border-preview{height: 300px; width: 300px;}		
+
+		.arco-border-blanco{background-image: url(images/contornos/arco_contorno_blanco.svg);}
+		.arco-border-negro{background-image: url(images/contornos/arco_contorno_blanco.svg);}		
+		.circulo-border-blanco{background-image: url(images/contornos/circulo_contorno_blanco.svg);}
+		.circulo-border-negro{background-image: url(images/contornos/circulo_contorno_negro.svg);}
+		.escudo-border-blanco{background-image: url(images/contornos/escudo_contorno_blanco.svg);}
+		.escudo-border-negro{background-image: url(images/contornos/escudo_contorno_negro.svg);}
+		.rectangulo-border-blanco{background-image: url(images/contornos/rectangulo_contorno_blanco.svg);}
+		.rectangulo-border-negro{background-image: url(images/contornos/rectangulo_contorno_negro.svg);}
+		.rombo-border-blanco{background-image: url(images/contornos/rombo_contorno_blanco.svg);}
+		.rombo-border-negro{background-image: url(images/contornos/rombo_contorno_negro.svg);}
 
 		.arco-negro{ background-image: url(images/etiquetas/arco_1.svg);}
 		.arco-blanco{ background-image: url(images/etiquetas/arco_2.svg);}
@@ -319,52 +374,52 @@
 		.rombo-cafe{ background-image: url(images/etiquetas/rombo_10.svg);}
 		
 		.arco{
-			height: 100px;
-			width: 100px;
+			height: 138px;
+			width: 138px;
 		}
 		.arco-preview{			
 			height: 300px;
 			width: 300px;
 		}
 		.circulo{
-			height: 100px;
-			width: 100px;
+			height: 138px;
+			width: 138px;
 		}
 		.circulo-preview{			
 			height: 300px;
 			width: 300px;
 		}
 		.escudo{
-			height: 100px;
-			width: 100px;
+			height: 138px;
+			width: 138px;
 		}
 		.escudo-preview{			
 			height: 300px;
 			width: 300px;
 		}		
 		.rectangulo{
-			height: 100px;
-			width: 100px;
+			height: 138px;
+			width: 138px;
 		}
 		.rectangulo-preview{
 			height: 300px;
 			width: 300px;
 		}		
 		.rombo{
-			height: 100px;
-			width: 100px;
+			height: 138px;
+			width: 138px;
 		}
 		.rombo-preview{			
 			height: 300px;
 			width: 300px;
 		}		
 
-		#label-big{
+		#label-big, #label-big-border, #label-small-border{
 			background-repeat: no-repeat;
 		}		
 		#label-small{
-			padding-top:250px;
-			padding-left: 110px;
+			padding-top:0px;
+			padding-left: 0px;
 			background-repeat: no-repeat;
 		}
 
@@ -377,8 +432,8 @@
 		}		
 
 		.navbar-default{
-			background: transparent;
-			border-color: transparent;
+			background: rgba(40, 44, 35, 0.8);
+			border-color: rgba(40, 44, 35, 0.8);
 		}
 		.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover{background-color: transparent;}
 		.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.open>a{background-image: none;}
@@ -386,9 +441,46 @@
 	    
 	    @media only screen and (max-width : 320px) {
 	        #label_preview{padding-left: 0px;}
-	        #beer_preview{padding-left: 64px;}
+	        #beer_preview{padding-left: 76px;}
 	    }
-
+	    @media only screen and (max-width : 768px) and (min-width: 768px) {
+	    	#main-wrapper{margin-top: 61px;}
+	    	#beer_preview{padding-left: 123px;}
+	    }
+	    @media only screen and (max-width : 360px) and (min-width: 360px) {
+	    	#main-wrapper{margin-top: 61px;}
+	    	#beer_preview{padding-left: 95px;}
+	    }	  
+	    @media only screen and (max-width : 414px) and (min-width: 414px) {
+	    	#beer_preview{padding-left: 121px;}
+	    }	    
+	    @media only screen and (max-width : 480px) and (min-width: 480px) {
+	    	#label_preview{padding-left:90px;}
+	    	#beer_preview{padding-left: 156px;}
+	    }	
+	    @media only screen and (max-width : 568px) and (min-width: 568px) {
+	    	#beer_preview{padding-left: 201px;}
+	    	#label_preview{padding-left: 130px;}
+	    }		    
+	    @media only screen and (max-width : 600px) and (min-width: 600px) {
+	    	#beer_preview{padding-left: 213px;}
+	    	#label_preview{padding-left: 150px;}
+	    }		    
+	    @media only screen and (max-width : 640px) and (min-width: 640px) {
+	    	#beer_preview{padding-left: 235px;}
+	    	#label_preview{padding-left: 170px;}
+	    }		    
+	    @media only screen and (max-width : 667px) and (min-width: 667px) {
+	    	#beer_preview{padding-left: 250px;}
+	    	#label_preview{padding-left: 195px;}
+	    }		  
+	    @media only screen and (max-width : 736px) and (min-width: 736px) {
+	    	#beer_preview{padding-left: 284px;}
+	    	#label_preview{padding-left: 220px;}
+	    }		          	      
+	    @media only screen and (max-width : 1024px) and (min-width: 1024px) {
+	    	#beer_preview{padding-left: 63px;}
+	    }		    
 
 	</style>
   <title>Personaliza tu cerveza</title>
@@ -426,15 +518,17 @@
 	  </div><!-- /.container-fluid -->
 	</nav>
 
-	<div class="container-fluid">
+	<div id="main-wrapper" class="container-fluid">
 		<div class="col-md-6 col-md-offset-3">
-			<div class="col-md-6 col-xs-12" id="label_preview">
+			<div class="col-md-6 col-sm-6 col-xs-12" id="label_preview">
 				<div id="label-big" class="arco-preview arco-negro">
+					<div id="label-big-border" class="arco-border-preview arco-border-blanco"></div>
 					<div class="big-custome-text wordwrap" style="font-family:'Calligraffitti', cursive;"></div>
 				</div>
 			</div>
-			<div class="col-md-6 col-xs-12" id="beer_preview">
+			<div class="col-md-6 col-sm-6 col-xs-12" id="beer_preview">
 				<div id="label-small" class="arco arco-negro">
+					<div id="label-small-border" class="arco-border arco-border-blanco"></div>					
 					<div class="small-custome-text small wordwrap" style="font-family:'Calligraffitti', cursive;"></div>
 				</div>
 			</div>
@@ -480,7 +574,7 @@
 				</div>
 			</div>	      	
 			<div class="col-md-12 col-xs-12 visible-sm visible-lg">
-				<div class="col-md-5 col-md-offset-1">
+				<div class="col-md-5">
 					<span class="col-md-2">Color:</span>
 					<div class="col-md-10">
 						<?php foreach ($label_color as $key => $value) { ?>
@@ -488,9 +582,17 @@
 						<?php }?>
 					</div>
 				</div>
-				<div class="col-md-6 text-right">
-					<span class="col-md-3">O también:</span>
-					<div class="col-md-4 text-left">
+				<div class="col-md-2">
+					<span class="col-md-5">Borde:</span>
+					<div class="col-md-7">
+						<?php foreach ($borde_color as $key => $value) { ?>
+							<div class="col-md-1 border-color-block pointer" bordercolor="<?php echo $value['name'] ?>" style="background-color:<?php echo $value['color']?>"></div>
+						<?php }?>
+					</div>
+				</div>
+				<div class="col-md-5 text-right">
+					<span class="col-md-5">O también:</span>
+					<div class="col-md-5 text-left">
 						<form runat="server">						
 							<input class="form-control uploadimage" type="file">
 						</form>
@@ -546,6 +648,7 @@
 		<input type="hidden" id="beer_type_value" name="beer_type_value">		
 		<input type="hidden" id="label_type_value" name="label_type_value">		
 		<input type="hidden" id="label_color_value" name="label_color_value">		
+		<input type="hidden" id="border_color_value" name="border_color_value">		
 		<input type="hidden" id="label_text_value" name="label_text_value">		
 		<input type="hidden" id="label_image_value" name="label_image_value">		
 		<input type="hidden" id="typography_type_value" name="typography_type_value">		
